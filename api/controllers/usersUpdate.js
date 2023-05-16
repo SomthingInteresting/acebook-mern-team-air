@@ -18,6 +18,20 @@ const UserUpdates = {
       }
     );
   },
+
+  Delete: (req, res) => {
+    User.findByIdAndDelete(
+      req.params.id,
+      (err, user) => {
+        if (err) {
+          console.log("UserUpdates error", err);
+          res.status(400).json({ message: "Bad request" });
+        } else {
+          res.status(200).json({ message: "OK", user });
+        }
+      }
+    );
+  }
 };
 
 module.exports = UserUpdates; 

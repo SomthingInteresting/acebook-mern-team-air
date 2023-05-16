@@ -109,5 +109,23 @@ describe("User Updates", () => {
     });
   });
 
+  
+describe("when deleting a user", () => {
+  let response;
+
+    beforeEach(async () => {
+      response = await request(app)
+        .delete(`/usersUpdate/${user._id}`)
+    });
+
+    it("should return status 200", async () => {
+      expect(response.statusCode).toEqual(200);
+    });
+
+    it("not be able to find the deleted user in database", async () => {
+      const deletedUser = await User.findById(user._id);
+      expect(deletedUser).toBeNull();
+    });
+})
 
 });

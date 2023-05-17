@@ -7,6 +7,7 @@ const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [newPost, setNewPost] = useState('');
+  const [selectedImage, setSelectedImage] = useState(null);
 
   // useEffect hook is used for handling side effects.
   // It fetches posts from the "/posts" endpoint and updates the posts state.
@@ -27,25 +28,37 @@ const Feed = ({ navigate }) => {
     }
   }, [])
 
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    setSelectedImage(file);
+
+  };
+
+
   // handleSubmit function handles post submission.
   // It sends a POST request to "/posts" endpoint with the new post data.
   const handleSubmit = async (event) => {
     event.preventDefault();
   
     try {
+      const formData = new FormData();
+      formData.append('message', JSON.stringify({ message: newPost }));
+      formData.append('image', selectedImage);
+      
       const response = await fetch("/posts", {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          // 'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({ message: newPost })
+        body: formData,
       });
-  
+      // JSON.stringify({ message: newPost })
       const data = await response.json();
   
       setPosts([{ ...data.post, _id: data.post._id}, ...posts]);
       setNewPost('');
+      setSelectedImage(null);
   
     } catch (error) {
       console.error(error);
@@ -138,6 +151,15 @@ const Feed = ({ navigate }) => {
           </label>
           <button id="post" type="submit">Post</button>
         </form>
+
+        <form onSubmit={handleSubmit}>
+          <label>
+            New Image Post:
+            <input id="postImage" type="file" accept="image/jpeg, image/png, image/jpg" onChange={handleImageUpload} />
+          </label>
+          <button id="post" type="submit">Post</button>
+        </form>
+
         <div id='feed' role="feed">
             {posts.map(
               (post) => ( <Post post={ post } key={ post._id } onLike={handleLike} onComment={handleComment} /> )

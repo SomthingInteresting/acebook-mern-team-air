@@ -1,5 +1,6 @@
 import moment from 'moment'
 import './Post.css'
+// import Friend from '../friend/Friend';
 import React, { useState } from 'react';
 
 

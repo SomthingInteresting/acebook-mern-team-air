@@ -19,8 +19,39 @@ const UsersController = {
       }
     });
   },
-};
 
+  AddFriend: async (req, res) => {
+    const { userId, friendId } = req.body; // Get both user IDs from the request body
+
+    try {
+      // Find the user and the potential friend in the database
+      const user = await User.findById(userId);
+      const friend = await User.findById(friendId);
+
+      if (!user || !friend) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+
+      // Check if they are already friends
+      if (user.friends.includes(friendId)) {
+        return res.status(400).json({ message: 'Users are already friends' });
+      }
+
+      // Add each other to their friends lists
+      user.friends.push(friend._id);
+      friend.friends.push(user._id);
+
+      // Save the changes to the database
+      await user.save();
+      await friend.save();
+
+      res.status(201).json({ message: 'OK', user: user, friend: friend });
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  },
+};
 
 module.exports = UsersController;
 

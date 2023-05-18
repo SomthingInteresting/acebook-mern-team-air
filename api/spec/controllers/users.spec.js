@@ -82,4 +82,41 @@ describe("/users 1", () => {
     });
     
   });
-  })
+
+  describe("POST /users/addfriend", () => {
+    test("adds a friend to a user's friends list", async () => {
+      const user1 = new User({
+        email: "test1@email.com",
+        password: "1234",
+        firstName: "User",
+        lastName: "One",
+      });
+      await user1.save();
+
+      const user2 = new User({
+        email: "test2@email.com",
+        password: "1234",
+        firstName: "User",
+        lastName: "Two",
+      });
+      await user2.save();
+
+      let response = await request(app)
+        .post(`/users/addfriend`)
+        .send({
+          userId: user1._id,
+          friendId: user2._id,
+        });
+
+      expect(response.statusCode).toBe(201);
+
+      let updatedUser1 = await User.findById(user1._id).populate('friends');
+      expect(updatedUser1.friends).toContainEqual(expect.objectContaining({
+        _id: expect.any(Object),
+        email: "test2@email.com",
+        firstName: "User",
+        lastName: "Two",
+      }));
+    });
+  });
+})

@@ -29,7 +29,7 @@ const Post = ({post, onLike, onComment}) => {
           <div className='name'> 
             { post.firstName + " "} 
             { post.lastName} 
-            
+            <button className='add-friend-button'> + friend </button>
           </div>
         </div>
         <div className='message-container'>

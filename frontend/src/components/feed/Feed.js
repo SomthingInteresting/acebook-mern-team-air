@@ -126,8 +126,6 @@ const Feed = ({ navigate }) => {
     }
   };
 
-  
-  
   // If token is present, render the posts feed with the ability to add a new post and logout.
   // If not, navigate to the signin page.
   if (token) {
@@ -149,10 +147,6 @@ const Feed = ({ navigate }) => {
     navigate('/login');
     return null;
   }
-
-  
 }
 
 export default Feed;
-
-

@@ -21,7 +21,7 @@ const Post = ({post, onLike, onComment}) => {
   const toggleComments = () => {
     setShowComments(!showComments);
   }
-  // const imagePath = 'frontend/public/default-user-t.png';
+
   const image = <img src="../../mongoose-user.png" alt="Image" width="75" height="75" />;
 
 
@@ -83,7 +83,5 @@ const Post = ({post, onLike, onComment}) => {
     </article>
        )
   }
-
-
 
 export default Post;

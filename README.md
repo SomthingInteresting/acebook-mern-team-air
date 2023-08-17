@@ -40,6 +40,8 @@ Our planning phase was meticulously organized using Trello. You can view our boa
 - [ ] Introduce the ability to delete posts.
 - [ ] Implement functionality to upload photos to posts.
 - [X] Merge the main branch to the deployed branch to integrate profile avatar options.
+- [ ] Implement validation checks for sign up.
+- [ ] Implement password encryption.
 
 ---
 

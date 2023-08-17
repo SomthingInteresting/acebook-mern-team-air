@@ -5,7 +5,7 @@
   "license": "CC BY-NC-SA",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "node ./bin/www",
     "start:test": "MONGODB_URL='mongodb://0.0.0.0/acebook_test' npm start",
     "test": "jest --runInBand --detectOpenHandles --coverage"
   },

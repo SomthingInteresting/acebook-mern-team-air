@@ -39,7 +39,7 @@ Our planning phase was meticulously organized using Trello. You can view our boa
 - [X] Implement a redirect/route to the signup page for the deployed site.
 - [ ] Introduce the ability to delete posts.
 - [ ] Implement functionality to upload photos to posts.
-- [ ] Merge the main branch to the deployed branch to integrate profile avatar options.
+- [X] Merge the main branch to the deployed branch to integrate profile avatar options.
 
 ---
 

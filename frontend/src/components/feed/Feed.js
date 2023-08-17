@@ -2,19 +2,14 @@ import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
 import './Feed.css';
 
-// Define a Feed component which receives a navigate prop to handle navigation.
 const Feed = ({ navigate }) => {
-  // Initialize states with useState for posts, token and newPost.
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [newPost, setNewPost] = useState('');
 
-  // useEffect hook is used for handling side effects.
-  // It fetches posts from the "/posts" endpoint and updates the posts state.
-  // The token is included in the header for authorization.
   useEffect(() => {
     if(token) {
-      fetch("/posts", {
+      fetch("https://moangoose.onrender.com/posts", {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -28,13 +23,11 @@ const Feed = ({ navigate }) => {
     }
   }, [])
 
-  // handleSubmit function handles post submission.
-  // It sends a POST request to "/posts" endpoint with the new post data.
   const handleSubmit = async (event) => {
     event.preventDefault();
   
     try {
-      const response = await fetch("/posts", {
+      const response = await fetch("https://moangoose.onrender.com/posts", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -53,11 +46,9 @@ const Feed = ({ navigate }) => {
     }
   };
 
-  // handleLike function sends a POST request to "/posts/{postId}/likes" endpoint to like a post.
-  // It also updates the post's like count in the local state.
   const handleLike = async (postId) => {
     try {
-      const response = await fetch(`/posts/${postId}/likes`, {
+      const response = await fetch(`https://moangoose.onrender.com/posts/${postId}/likes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -69,7 +60,6 @@ const Feed = ({ navigate }) => {
   
       if (response.status === 400) {
         removeLike(postId);
-
       } else {
         setPosts(posts.map(post => 
           post._id === postId ? { ...post, like: data.post.like } : post
@@ -82,7 +72,7 @@ const Feed = ({ navigate }) => {
   
   const removeLike = async (postId) => {
     try {
-      const response = await fetch(`/posts/${postId}/likes`, {
+      const response = await fetch(`https://moangoose.onrender.com/posts/${postId}/likes`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -107,7 +97,7 @@ const Feed = ({ navigate }) => {
 
   const handleComment = async (postId, comment) => {
     try {
-      const response = await fetch(`/posts/${postId}/comments`, {
+      const response = await fetch(`https://moangoose.onrender.com/posts/${postId}/comments`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -115,8 +105,6 @@ const Feed = ({ navigate }) => {
         },
         body: JSON.stringify({ comment })
       });
-  
-      // const data = await response.json();
   
       setPosts(posts.map(post => 
         post._id === postId ? { ...post, comments: [...post.comments, { comment, author: { name: 'You' }, date: new Date(), _id: new Date().getTime() }] } : post
@@ -126,10 +114,6 @@ const Feed = ({ navigate }) => {
     }
   };
 
-  
-  
-  // If token is present, render the posts feed with the ability to add a new post and logout.
-  // If not, navigate to the signin page.
   if (token) {
     return (
       <div className="feed-container">
@@ -149,10 +133,6 @@ const Feed = ({ navigate }) => {
     navigate('/login');
     return null;
   }
-
-  
 }
 
 export default Feed;
-
-

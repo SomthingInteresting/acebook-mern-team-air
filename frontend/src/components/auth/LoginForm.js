@@ -10,7 +10,7 @@ const LogInForm = ({ navigate }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    let response = await fetch("/tokens", {
+    let response = await fetch("https://moangoose.onrender.com/tokens", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

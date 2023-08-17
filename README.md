@@ -13,7 +13,7 @@ Welcome to the Moangoose Social App, a collaborative project developed by Team M
 
 This application is proudly deployed by **Q**. 
 
-🔗 [Visit our deployed website!](https://moangoose-frontend.onrender.com/signup)
+🔗 [Visit our deployed website!](https://moangoose-frontend.onrender.com)
 
 ## Team Moangoose
 - Q

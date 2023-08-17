@@ -41,6 +41,10 @@ const tokenChecker = (req, res, next) => {
   });
 };
 
+app.get('/', (req, res) => {
+  res.send('Backend is running');
+});
+
 // route setup
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/tokens", tokensRouter);

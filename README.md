@@ -1,6 +1,4 @@
-# Moangoose Social App
-
-![Moangoose Logo Banner](public/images/Moangoose banner.png)
+<img src="public/images/Moangoose%20banner.png" alt="Moangoose Logo Banner" width="400"/>
 
 Welcome to the Moangoose Social App, a collaborative project developed by Team Moangoose. This application offers a platform for users to share posts, interact with others, and experience a seamless social networking environment.
 

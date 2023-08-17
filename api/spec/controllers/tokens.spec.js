@@ -33,4 +33,13 @@ describe.only("/tokens", () => {
     expect(response.body.message).toEqual("auth error")
   })
 
+  test('should return status 401 and "auth error" message when user is not found', async () => {
+    const response = await request(app)
+      .post('/tokens')
+      .send({ email: 'nonexistent@test.com', password: 'password123' });
+
+    expect(response.status).toEqual(401);
+    expect(response.body.message).toEqual('auth error');
+  });
+
 })

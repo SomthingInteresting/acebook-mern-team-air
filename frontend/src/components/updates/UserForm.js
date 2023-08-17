@@ -7,6 +7,8 @@ const UserForm = ({ navigate }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [icon, setIcon] = useState("");
+  const [selectedIcon, setSelectedIcon] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [passwordsMatchError, setPasswordsMatchError] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
@@ -33,6 +35,7 @@ const UserForm = ({ navigate }) => {
         password: password,
         firstName: firstName,
         lastName: lastName,
+        icon: icon,
       }),
     })
       .then((response) => {
@@ -45,6 +48,7 @@ const UserForm = ({ navigate }) => {
           setPassword("");
           setFirstName("");
           setLastName("");
+          setIcon("");
         } else {
           setSuccessMessage("Changes failed, please try again.");
         }
@@ -69,6 +73,19 @@ const UserForm = ({ navigate }) => {
   const handleLastNameUpdate = (event) => {
     setLastName(event.target.value);
   };
+
+  const handleIconUpdate = (event) => {
+    setIcon(event.target.value);
+  };
+
+  const icons = [
+    { name: 'white', src: '../../white.png' },
+    { name: 'red', src: '../../red.png' },
+    { name: 'black', src: '../../black.png' },
+    { name: 'blue', src: '../../blue.png' },
+    { name: 'purple', src: '../../purple.png' },
+    { name: 'green', src: '../../green.png' },
+  ];
 
   const handleConfirm = () => {
     if (confirmPassword === password) {
@@ -172,6 +189,29 @@ const UserForm = ({ navigate }) => {
               onChange={handleLastNameUpdate}
             />
           </div>
+        </div>
+          
+          <div className="icon-grid">
+            <div className="icon-container">
+              {icons.map((icon) => (
+              <div key={icon.name} className="icon-item">
+                <input
+                  type="radio"
+                  id={icon.name}
+                  name={icon.name}
+                  value={icon.name}
+                  checked={selectedIcon === icon.name}
+                  onChange={handleIconUpdate}
+                />
+
+                <label htmlFor={icon.name}>
+                  <img src={icon.src} alt={icon.name} width="75" height="75" />
+                </label>
+
+              </div>
+            ))}
+            </div>
+          
         </div>
       </div>
 

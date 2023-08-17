@@ -21,9 +21,10 @@ const Post = ({post, onLike, onComment}) => {
   const toggleComments = () => {
     setShowComments(!showComments);
   }
-  // const imagePath = 'frontend/public/default-user-t.png';
-  const image = <img src="../../mongoose-user.png" alt="Image" width="75" height="75" />;
 
+  const icon_col = post.icon;
+  const imagePath = `../../${icon_col}.png`;
+  const image = <img src={ imagePath } alt="Image" width="75" height="75" />;
 
   return (
     <article data-cy="post" key={ post._id }>

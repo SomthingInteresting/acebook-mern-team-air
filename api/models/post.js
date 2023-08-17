@@ -17,6 +17,7 @@ const PostSchema = new mongoose.Schema({
   time: { type: Date, default: Date.now },
   firstName: { type: String, required: false },
   lastName: { type: String, required: false },
+  icon: { type: String, required: false },
   likedBy: { type: [String], default: [] },
   comments: [CommentSchema],
 });

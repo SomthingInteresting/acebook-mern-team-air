@@ -31,6 +31,7 @@ const SignUpForm = ({ navigate }) => {
         password: password,
         firstName: firstName,
         lastName: lastName,
+        icon: "black",
       }),
       credentials: 'include'
     }).then((response) => {

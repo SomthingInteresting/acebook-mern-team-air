@@ -41,6 +41,32 @@ describe("User Updates", () => {
     await post.save();
   });
 
+  describe('when encountering an error during update', () => {
+    const updatedFields = {
+      email: 'newemail@test.com',
+    };
+    let response;
+
+    beforeEach(async () => {
+      // Mock the error by setting UserId to an invalid value
+      const invalidUserId = 'invalid_user_id';
+      const token = TokenGenerator.jsonwebtoken(invalidUserId);
+
+      response = await request(app)
+        .put('/userUpdatesRoute')
+        .set('Cookie', [`token=${token}`])
+        .send(updatedFields);
+    });
+
+    it('should return status 400', async () => {
+      expect(response.statusCode).toEqual(400);
+    });
+
+    it('should return "Bad request" message', async () => {
+      expect(response.body.message).toEqual('Bad request');
+    });
+  });
+
   describe("when updating only the first name", () => {
     const updatedFields = {
       firstName: "John",
@@ -89,6 +115,28 @@ describe("User Updates", () => {
     });
   });
 
+  describe('when deleting a user that does not exist', () => {
+    let response;
+
+    beforeEach(async () => {
+      // Delete the user to simulate the user not found scenario
+      await User.findByIdAndDelete(user._id);
+
+      response = await request(app)
+        .delete('/userUpdatesRoute')
+        .set('Cookie', [`token=${new_token}`]);
+    });
+
+    it('should return status 404', async () => {
+      expect(response.statusCode).toEqual(404);
+    });
+
+    it('should return an error message "User not found"', async () => {
+      expect(response.body.message).toEqual('User not found');
+    });
+  });
+
+
   describe("when updating email only", () => {
     const updatedFields = {
       email: "newJohn@email.com",
@@ -134,6 +182,8 @@ describe("User Updates", () => {
       expect(updatedUser.password).toEqual(updatedFields.password);
     });
   });
+
+  
 
   describe("when deleting a user", () => {
     let response;

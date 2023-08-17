@@ -31,6 +31,7 @@ const PostsController = {
         timestamp: new Date(),
         firstName: user.firstName,
         lastName: user.lastName,
+        icon: user.icon,
       });
 
       const savedPost = await post.save();

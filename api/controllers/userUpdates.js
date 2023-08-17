@@ -8,13 +8,14 @@ const UserUpdates = {
     console.log("decoded_user_id", UserId);
 
     console.log("Request data:", req.body);
-    const { email, password, firstName, lastName } = req.body;
+    const { email, password, firstName, lastName, icon } = req.body;
 
     const updateFields = {};
     if (email) updateFields.email = email;
     if (password) updateFields.password = password;
     if (firstName) updateFields.firstName = firstName;
     if (lastName) updateFields.lastName = lastName;
+    if (icon) updateFields.icon = icon;
 
     User.findByIdAndUpdate(
       UserId,

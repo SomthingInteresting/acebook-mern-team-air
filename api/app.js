@@ -4,7 +4,9 @@ const path = require("path");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser")
 const JWT = require("jsonwebtoken");
-require('dotenv').config();
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
 const postsRouter = require("./routes/posts");
 const tokensRouter = require("./routes/tokens");

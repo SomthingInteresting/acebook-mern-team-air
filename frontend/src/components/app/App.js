@@ -9,11 +9,11 @@ import {
   useNavigate,
   Routes,
   Route,
+  Navigate
 } from "react-router-dom";
 import Navigation from '../nav_bar/nav_bar';
 
 import logo from './smbg.png'
-
 
 const App = () => {
     return (
@@ -22,6 +22,7 @@ const App = () => {
       <div className='logo' />
       <Navigation />
         <Routes>
+          <Route path='/' element={<Navigate to="/signup" />} />
           <Route path='/posts'  element={<Feed navigate={ useNavigate() }/>}/>
           <Route path='/login'  element={<LoginForm  navigate={ useNavigate() }/>}/>
           <Route path='/signup' element={<SignUpForm navigate={ useNavigate() }/>}/>

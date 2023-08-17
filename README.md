@@ -36,7 +36,7 @@ Our planning phase was meticulously organized using Trello. You can view our boa
 - [ ] Ensure responsive web design for optimal viewing across devices.
 - [ ] Configure MongoDB Atlas for database management.
 - [ ] Update remaining components to point to the correct deployment endpoints.
-- [ ] Implement a redirect/route to the signup page for the deployed site.
+- [X] Implement a redirect/route to the signup page for the deployed site.
 - [ ] Introduce the ability to delete posts.
 - [ ] Implement functionality to upload photos to posts.
 - [ ] Merge the main branch to the deployed branch to integrate profile avatar options.

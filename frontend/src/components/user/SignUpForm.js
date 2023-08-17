@@ -21,7 +21,7 @@ const SignUpForm = ({ navigate }) => {
   };
 
   const submitForm = () => {
-    fetch("/users", {
+    fetch("https://moangoose.onrender.com/users", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

@@ -1,5 +1,6 @@
 const createError = require("http-errors");
 const express = require("express");
+const cors = require('cors');
 const path = require("path");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser")
@@ -22,6 +23,14 @@ app.use(cookieParser());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+
+// CORS setup
+app.use(cors({
+  origin: 'https://moangoose-frontend.onrender.com', 
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
 // middleware function to check for valid tokens
 const tokenChecker = (req, res, next) => {

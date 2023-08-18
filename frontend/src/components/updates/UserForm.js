@@ -30,6 +30,7 @@ const UserForm = ({ navigate }) => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({
         email: email,
         password: password,
@@ -110,6 +111,7 @@ const UserForm = ({ navigate }) => {
 
     fetch("https://moangoose.onrender.com/userUpdatesRoute", {
       method: "delete",
+      credentials: "include",
     })
       .then((response) => {
         if (response.status === 200) {

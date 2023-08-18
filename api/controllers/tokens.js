@@ -16,6 +16,7 @@ const SessionsController = {
         res.status(401).json({ message: "auth error" });
       } else {
         const token = await TokenGenerator.jsonwebtoken(user.id)
+        res.cookie('token', token, { expires: new Date(Date.now() + 86400000), domain: '.onrender.com', secure: true }); // Set the cookie for 1 day
         res.status(201).json({ token: token, message: "OK" });
       }
     });

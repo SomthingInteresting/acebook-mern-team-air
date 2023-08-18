@@ -4,6 +4,7 @@ const Post = require("../models/post");
 
 const UserUpdates = {
   Update: (req, res) => {
+    console.log("Request cookies:", req.cookies);
     const decodedToken = TokenDecoder.decode(req.cookies.token);
     if (!decodedToken || !decodedToken.user_id) {
         return res.status(400).json({ message: "Invalid or expired token." });

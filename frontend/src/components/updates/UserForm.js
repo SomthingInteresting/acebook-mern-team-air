@@ -108,7 +108,7 @@ const UserForm = ({ navigate }) => {
   const handlePopupOK = () => {
     window.localStorage.removeItem("token");
 
-    fetch("/userUpdatesRoute", {
+    fetch("https://moangoose.onrender.com/userUpdatesRoute", {
       method: "delete",
     })
       .then((response) => {

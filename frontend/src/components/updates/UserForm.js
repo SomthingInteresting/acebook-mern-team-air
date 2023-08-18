@@ -25,7 +25,7 @@ const UserForm = ({ navigate }) => {
   };
 
   const submitForm = () => {
-    fetch("/userUpdatesRoute", {
+    fetch("https://moangoose.onrender.com/userUpdatesRoute", {
       method: "put",
       headers: {
         "Content-Type": "application/json",

@@ -4,7 +4,11 @@ const Post = require("../models/post");
 
 const UserUpdates = {
   Update: (req, res) => {
-    const UserId = TokenDecoder.decode(req.cookies.token).user_id;
+    const decodedToken = TokenDecoder.decode(req.cookies.token);
+    if (!decodedToken || !decodedToken.user_id) {
+        return res.status(400).json({ message: "Invalid or expired token." });
+    }
+    const UserId = decodedToken.user_id;
     console.log("decoded_user_id", UserId);
 
     console.log("Request data:", req.body);
@@ -33,7 +37,11 @@ const UserUpdates = {
   },
 
   Delete: async (req, res) => {
-    const UserId = TokenDecoder.decode(req.cookies.token).user_id;
+    const decodedToken = TokenDecoder.decode(req.cookies.token);
+    if (!decodedToken || !decodedToken.user_id) {
+        return res.status(400).json({ message: "Invalid or expired token." });
+    }
+    const UserId = decodedToken.user_id;
 
     try {
       const deletedUser = await User.findByIdAndDelete(UserId);
@@ -57,9 +65,3 @@ const UserUpdates = {
 };
 
 module.exports = UserUpdates;
-
-
-//findByIdAndUpdate() is a standard mongoose function
-//By default, findByIdAndUpdate() returns the document as it was before update was applied. 
-//If you set { new: true} , findbyIdAndUpdate() will instead give you the object after update was applied.
-
